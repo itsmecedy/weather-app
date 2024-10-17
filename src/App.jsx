@@ -25,10 +25,8 @@ export default function App() {
   };
 
   return (
-    <>
+    <div className=" border-2 border-red-600 max-w-[50%]">
       <div className="app-header "></div>
-      <h1 className="text-3xl font-bold underline">Hello world!</h1>
-
       {/* Search box */}
       <div>
         <input
@@ -54,6 +52,6 @@ export default function App() {
       {weather.weather && weather.weather[0] && (
         <p>{weather.weather[0].description}</p>
       )}
-    </>
+    </div>
   );
 }
