@@ -25,10 +25,29 @@ export default function App() {
   };
 
   return (
-    <div className=" border-2 border-red-600 max-w-[50%]">
-      <div className="app-header "></div>
-      {/* Search box */}
-      <div>
+    <div className=" border-2 border-red-600 w-[50%] flex align-middle items-center flex-row">
+      {/* right side */}
+      <div className="  flex-[2_2_0%]">
+        {/* Location */}
+        {weather.name && weather.sys && (
+          <p>{`${weather.name}, ${weather.sys.country}`}</p>
+        )}
+
+        {/* Temperature */}
+        {weather.main && <p>{`${weather.main.temp}°C`}</p>}
+
+        {/* Condition */}
+        {weather.weather && weather.weather[0] && (
+          <p>{weather.weather[0].main}</p>
+        )}
+        {weather.weather && weather.weather[0] && (
+          <p>{weather.weather[0].description}</p>
+        )}
+      </div>
+
+      {/* right side */}
+      <div className="flex-1">
+        {/* Search box */}
         <input
           type="text"
           placeholder="Enter City/Town..."
@@ -36,22 +55,6 @@ export default function App() {
         />
         <button onClick={searchPressed}>Search</button>
       </div>
-
-      {/* Location */}
-      {weather.name && weather.sys && (
-        <p>{`${weather.name}, ${weather.sys.country}`}</p>
-      )}
-
-      {/* Temperature */}
-      {weather.main && <p>{`${weather.main.temp}°C`}</p>}
-
-      {/* Condition */}
-      {weather.weather && weather.weather[0] && (
-        <p>{weather.weather[0].main}</p>
-      )}
-      {weather.weather && weather.weather[0] && (
-        <p>{weather.weather[0].description}</p>
-      )}
     </div>
   );
 }
