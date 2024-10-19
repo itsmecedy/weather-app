@@ -25,9 +25,9 @@ export default function App() {
   };
 
   return (
-    <div className=" border-2 border-red-600 w-[50%] flex align-middle items-center flex-row">
+    <div className=" border-2 border-red-600 w-[50%] h-[800px] flex align-middle items-center flex-row">
       {/* right side */}
-      <div className="  flex-[2_2_0%]">
+      <div className=" border-2 flex-[2_2_0%]">
         {/* Location */}
         {weather.name && weather.sys && (
           <p>{`${weather.name}, ${weather.sys.country}`}</p>
