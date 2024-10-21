@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const api = {
   key: "edec11bce02f2c92262d9c75b8c7d47a",
@@ -9,8 +9,9 @@ export default function App() {
   const [search, setSearch] = useState("");
   const [weather, setWeather] = useState({});
 
-  const searchPressed = () => {
-    fetch(`${api.base}weather?q=${search}&units=metric&APPID=${api.key}`)
+  // Function to fetch weather data based on the city name
+  const fetchWeather = (city) => {
+    fetch(`${api.base}weather?q=${city}&units=metric&APPID=${api.key}`)
       .then((res) => {
         if (!res.ok) {
           throw new Error(`Error: ${res.status} ${res.statusText}`);
@@ -24,10 +25,20 @@ export default function App() {
       .catch((error) => console.error("Error fetching weather data:", error));
   };
 
+  // Fetch weather for a default city (e.g., "Manila") when the app loads
+  useEffect(() => {
+    fetchWeather("Manila");  // Change "Manila" to any city you want as default
+  }, []);
+
+  // Handle search button press
+  const searchPressed = () => {
+    fetchWeather(search);
+  };
+
   return (
-    <div className=" border-2 border-red-600 w-[50%] h-[800px] flex align-middle items-center flex-row">
-      {/* right side */}
-      <div className=" flex-[2_2_0%]">
+    <div className="border-2 border-red-600 w-full h-full grid grid-cols-7">
+      {/* Left side */}
+      <div className="col-span-4 w-full border-2">
         {/* Location */}
         {weather.name && weather.sys && (
           <p>{`${weather.name}, ${weather.sys.country}`}</p>
@@ -38,15 +49,15 @@ export default function App() {
 
         {/* Condition */}
         {weather.weather && weather.weather[0] && (
-          <p>{weather.weather[0].main}</p>
-        )}
-        {weather.weather && weather.weather[0] && (
-          <p>{weather.weather[0].description}</p>
+          <>
+            <p>{weather.weather[0].main}</p>
+            <p>{weather.weather[0].description}</p>
+          </>
         )}
       </div>
 
-      {/* right side */}
-      <div className="flex-1">
+      {/* Right side */}
+      <div className="col-span-3 w-full">
         {/* Search box */}
         <input
           type="text"
