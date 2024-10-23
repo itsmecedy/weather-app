@@ -182,7 +182,7 @@ export default function App() {
     <div className="border-2 border-red-600 w-full h-full  gap-4 flex flex-col lg:flex-row">
       {/* Left side */}
       <div className="col-span-3 w-full flex flex-col items-center justify-center p-8">
-        <div className="border-2 border-red-600 p-4 text-center">
+        <div className=" py-6  text-center">
           {/* Location */}
           {weather.name && weather.sys && (
             <p className="text-2xl">{`${weather.name}, ${weather.sys.country}`}</p>
@@ -194,7 +194,7 @@ export default function App() {
             type="text"
             placeholder="Enter City/Town..."
             onChange={(e) => setSearch(e.target.value)}
-            className="px-4 py-2 border outline-purple-500 rounded-md flex-grow capitalize text-purple-600"
+            className="px-4 py-2 border outline-purple-500 rounded-md flex-grow capitalize text-blue-800"
           />
           <button
             onClick={searchPressed}
@@ -252,7 +252,7 @@ export default function App() {
               >
                 {/* Show "Today" for the first item */}
                 <div className=" flex justify-center flex-col items-center mx-auto">
-                  <p className="font-semibold">
+                  <p className="font-semibold ">
                     {index === 0 ? "Today" : f.date}
                   </p>
                   <img

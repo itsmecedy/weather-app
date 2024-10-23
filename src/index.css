@@ -47,3 +47,33 @@
   padding: 1rem;
   align-items: center;
 }
+
+/* For screens up to 1400px */
+@media (max-width: 1400px) {
+  .chart-container {
+    margin: 1rem; /* Reduced margin for medium screens */
+    padding: 1rem; /* Maintain padding */
+    height: 30%; /* Adjust height for smaller screens */
+  }
+}
+
+/* For screens up to 1024px (tablets and smaller) */
+@media (max-width: 1024px) {
+  .chart-container {
+    margin: 0.5rem; /* Further reduce margin */
+    padding: 1rem; /* Keep padding */
+    height: auto;
+/* Adjust height */
+    flex-direction: column; /* Ensure the flex direction remains */
+  }
+}
+
+/* For mobile screens */
+@media (max-width: 768px) {
+  .chart-container {
+    margin: 0.5rem; /* Small margin for mobile */
+    padding: 0.5rem; /* Less padding for mobile */
+    height: 80%; /* Adjust height further */
+    width: 95%; /* Full width on mobile */
+  }
+}
