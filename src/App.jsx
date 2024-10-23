@@ -1,4 +1,26 @@
 import { useState, useEffect } from "react";
+import { Line } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+// Register ChartJS components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 
 const api = {
   key: "edec11bce02f2c92262d9c75b8c7d47a",
@@ -99,17 +121,80 @@ export default function App() {
 
   const dailyForecasts = getDailyForecasts();
 
+  // Prepare data for the line chart
+  const chartData = {
+    labels: dailyForecasts.map((f) => f.date),
+    datasets: [
+      {
+        label: "Temperature (°C)",
+        data: dailyForecasts.map((f) => f.avgTemp),
+        fill: false,
+        backgroundColor: "rgba(75,192,192,1)",
+        borderColor: "rgba(75,192,192,1)",
+        tension: 0.1, // To add a slight curve to the line
+      },
+    ],
+  };
+  const chartOptions = {
+    plugins: {
+      legend: {
+        display: true, // Hide the legend
+        labels: {
+          color: "white", // Change legend text color
+        },
+      },
+      tooltip: {
+        callbacks: {
+          label: (context) => {
+            return `${context.raw.toFixed(1)}°C`;
+          },
+        },
+        titleColor: "white", // Change tooltip title color
+        bodyColor: "white", // Change tooltip body color
+      },
+    },
+    scales: {
+      y: {
+        beginAtZero: false,
+        title: {
+          display: true,
+          text: "Temperature (°C)",
+          color: "white", // Change y-axis title color
+        },
+        ticks: {
+          color: "white", // Change y-axis tick color
+        },
+      },
+      x: {
+        title: {
+          display: true,
+          text: "Date",
+          color: "white", // Change x-axis title color
+        },
+        ticks: {
+          color: "white", // Change x-axis tick color
+        },
+      },
+    },
+  };
+
   return (
-    <div className="border-2 border-red-600 w-full h-full grid grid-cols-7 gap-4">
+    <div className="border-2 border-red-600 w-full h-full  gap-4 flex flex-col lg:flex-row">
       {/* Left side */}
-      <div className="col-span-3 w-full flex flex-col items-center justify-center">
+      <div className="col-span-3 w-full flex flex-col items-center justify-center p-8">
+        <div className="border-2 border-red-600 p-4 text-center">
+          {/* Location */}
+          {weather.name && weather.sys && (
+            <p className="text-2xl">{`${weather.name}, ${weather.sys.country}`}</p>
+          )}
+        </div>
         {/* Search box */}
         <div className="w-2/3 flex items-center justify-center space-x-2 mb-4">
           <input
             type="text"
             placeholder="Enter City/Town..."
             onChange={(e) => setSearch(e.target.value)}
-            className="px-4 py-2 border outline-purple-500 rounded-md flex-grow text-purple-600"
+            className="px-4 py-2 border outline-purple-500 rounded-md flex-grow capitalize text-purple-600"
           />
           <button
             onClick={searchPressed}
@@ -146,44 +231,47 @@ export default function App() {
 
       {/* Right side */}
       <div className="col-span-4 w-full border-2 border-red-600 flex flex-col p-4">
-        <div className="border-2 border-red-600 p-4 text-center">
-          {/* Location */}
-          {weather.name && weather.sys && (
-            <p className="text-2xl">{`${weather.name}, ${weather.sys.country}`}</p>
-          )}
-        </div>
-        {/* 5-Day Forecast */}
-        // Inside the Right side div, replace the forecast rendering section
-        with this:
         {/* 5-Day Forecast */}
         <div className="mt-4">
           <h2 className="text-xl font-bold">5-Day Forecast</h2>
-          <div className="grid grid-cols-5 gap-4 mt-4">
+          <div className="flex justify-center w-full gap-4 mt-4">
             {dailyForecasts.map((f, index) => (
               <div
                 key={index}
-                className="flex items-center border p-2"
+                className="flex items-center border p-2 sm:w-20 lg:text-xsm md:w-28 lg:w-24 xl:w-28 w-32"
                 style={{
-                  backgroundColor: index === 0 ? "skyblue" : "transparent",
-                  color: index === 0 ? "white" : "black",
+                  backgroundColor:
+                    index === 0 ? "#2699E3" : "rgba(255, 255, 255, 0.3)", // Transparent background for glass effect
+                  color: index === 0 ? "white" : "black", // Text color based on index
+                  backdropFilter: "blur(10px)", // Blur effect for glassmorphism
+                  borderRadius: "16px", // Rounded corners
+                  boxShadow: "0 4px 30px rgba(0, 0, 0, 0.2)", // Shadow for depth
+                  border:
+                    index === 0 ? "none" : "1px solid rgba(255, 255, 255, 0.5)", // Border for non-today items
                 }}
               >
                 {/* Show "Today" for the first item */}
-                <div>
+                <div className=" flex justify-center flex-col items-center mx-auto">
                   <p className="font-semibold">
                     {index === 0 ? "Today" : f.date}
                   </p>
+                  <img
+                    src={`http://openweathermap.org/img/wn/${f.icon}@2x.png`}
+                    alt={f.description}
+                    className="w-16 h-16 mr-2"
+                  />
                   <p>{`${f.avgTemp.toFixed(1)}°C`}</p>
                   <p>{f.description}</p>
                 </div>
-                <img
-                  src={`http://openweathermap.org/img/wn/${f.icon}@2x.png`}
-                  alt={f.description}
-                  className="w-16 h-16 mr-2"
-                />
               </div>
             ))}
           </div>
+        </div>
+
+        {/* Line chart for the forecast */}
+        <div className=" chart-container">
+          <h2 className="text-xl font-bold">Temperature Trend</h2>
+          <Line data={chartData} options={chartOptions} />
         </div>
       </div>
     </div>

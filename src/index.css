@@ -14,6 +14,10 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  --glassmorphism-bg: rgba(255, 255, 255, 0.2);
+  --glassmorphism-backdrop: blur(10px);
+  --glassmorphism-border: rgba(255, 255, 255, 0.3);
+  --glassmorphism-shadow: rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -22,4 +26,24 @@
   font-family: "Poppins", sans-serif;
   box-sizing: border-box;
   color: whitesmoke;
+}
+
+.chart-container {
+  position: relative;
+  width: auto;
+  height: 50%;
+  background: var(--glassmorphism-bg);
+  backdrop-filter: var(--glassmorphism-backdrop);
+  -webkit-backdrop-filter: var(--glassmorphism-backdrop);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px var(--glassmorphism-shadow);
+  border: 1px solid var(--glassmorphism-border);
+  color: black;
+  display: flex;
+  margin: 1rem 5rem;
+  box-sizing: border-box;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: center;
 }
