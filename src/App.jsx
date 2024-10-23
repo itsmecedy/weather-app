@@ -194,8 +194,14 @@ export default function App() {
             type="text"
             placeholder="Enter City/Town..."
             onChange={(e) => setSearch(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                searchPressed();
+              }
+            }}
             className="px-4 py-2 border outline-purple-500 rounded-md flex-grow capitalize text-blue-800"
           />
+
           <button
             onClick={searchPressed}
             className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
@@ -230,10 +236,10 @@ export default function App() {
       </div>
 
       {/* Right side */}
-      <div className="col-span-4 w-full border-2 border-red-600 flex flex-col p-4">
+      <div className="col-span-4 w-full border-2 border-red-600 flex flex-col justify-center p-4">
         {/* 5-Day Forecast */}
         <div className="mt-4">
-          <h2 className="text-xl font-bold">5-Day Forecast</h2>
+          <h2 className="text-xl text-center font-bold">5-Day Forecast</h2>
           <div className="flex justify-center w-full gap-4 mt-4">
             {dailyForecasts.map((f, index) => (
               <div
