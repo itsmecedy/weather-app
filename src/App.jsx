@@ -247,13 +247,14 @@ export default function App() {
                 className="flex items-center border p-2 sm:w-20 lg:text-xsm md:w-28 lg:w-24 xl:w-28 w-32"
                 style={{
                   backgroundColor:
-                    index === 0 ? "#2699E3" : "rgba(255, 255, 255, 0.3)", // Transparent background for glass effect
-                  color: index === 0 ? "white" : "black", // Text color based on index
-                  backdropFilter: "blur(10px)", // Blur effect for glassmorphism
-                  borderRadius: "16px", // Rounded corners
-                  boxShadow: "0 4px 30px rgba(0, 0, 0, 0.2)", // Shadow for depth
+                    index === 0 ? "#2699E3" : "rgba(255, 255, 255, 0.3)",
+                  color: index === 0 ? "white" : "black",
+                  backdropFilter: "blur(10px)",
+                  borderRadius: "16px",
+                  boxShadow: "0 4px 30px rgba(0, 0, 0, 0.2)",
                   border:
-                    index === 0 ? "none" : "1px solid rgba(255, 255, 255, 0.5)", // Border for non-today items
+                    index === 0 ? "none" : "1px solid rgba(255, 255, 255, 0.5)",
+                  items,
                 }}
               >
                 {/* Show "Today" for the first item */}
