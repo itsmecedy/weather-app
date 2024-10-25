@@ -254,7 +254,6 @@ export default function App() {
                   boxShadow: "0 4px 30px rgba(0, 0, 0, 0.2)",
                   border:
                     index === 0 ? "none" : "1px solid rgba(255, 255, 255, 0.5)",
-                  items,
                 }}
               >
                 {/* Show "Today" for the first item */}
