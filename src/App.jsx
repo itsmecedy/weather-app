@@ -179,17 +179,17 @@ export default function App() {
   };
 
   return (
-    <div className="border-2 border-red-600 w-full h-full  gap-4 flex flex-col lg:flex-row">
+    <div className="border-2 border-red-600 w-full h-full  flex flex-col lg:flex-row ">
       {/* Left side */}
-      <div className="col-span-3 w-full flex flex-col items-center justify-center p-8">
-        <div className=" py-6  text-center">
+      <div className="col-span-3 w-full flex flex-col items-center justify-center lg:p-8 pb-2">
+        <div className=" lg:py-6 pt-6 pb-4 text-center">
           {/* Location */}
           {weather.name && weather.sys && (
             <p className="text-2xl">{`${weather.name}, ${weather.sys.country}`}</p>
           )}
         </div>
         {/* Search box */}
-        <div className="w-2/3 flex items-center justify-center space-x-2 mb-4">
+        <div className="w-2/3 flex items-center justify-center space-x-2 md:mb-4">
           <input
             type="text"
             placeholder="Enter City/Town..."
@@ -201,7 +201,6 @@ export default function App() {
             }}
             className="px-4 py-2 border outline-purple-500 rounded-md flex-grow capitalize text-blue-800"
           />
-
           <button
             onClick={searchPressed}
             className="px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
@@ -210,9 +209,11 @@ export default function App() {
           </button>
         </div>
         {/* Display local time */}
-        {localTime && <p className="mt-4 text-lg font-semibold">{localTime}</p>}
+        {localTime && (
+          <p className="lg:mt-4 text-md lg:text-lg font-semibold">{localTime}</p>
+        )}
 
-        {/* Condition */}
+        {/* Weather Condition */}
         {weather.weather && weather.weather[0] && (
           <>
             <div className="flex items-center">
@@ -220,27 +221,26 @@ export default function App() {
               <img
                 src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}@2x.png`}
                 alt={weather.weather[0].description}
-                className="mx-auto"
-                style={{ width: "150px", height: "150px" }}
+                className="mx-auto lg:w-[150px] lg:h-[150px]"
               />
               {/* Temperature */}
               {weather.main && (
-                <p className="text-4xl font-bold">{`${weather.main.temp}°C`}</p>
+                <p className="md:text-4xl text-lg font-bold">{`${weather.main.temp}°C`}</p>
               )}
             </div>
 
-            <b className="text-4xl mb-4">{weather.weather[0].main}</b>
-            <p className="text-2xl">{weather.weather[0].description}</p>
+            <b className="mb:text-4xl text-3xl lg:mb-4">{weather.weather[0].main}</b>
+            <p className="mb:text-3xl text-2xl ">{weather.weather[0].description}</p>
           </>
         )}
       </div>
 
       {/* Right side */}
-      <div className="col-span-4 w-full border-2 border-red-600 flex flex-col justify-center p-4">
+      <div className="col-span-4 w-full border-2 border-red-600 flex flex-col justify-center lg:p-4 ">
         {/* 5-Day Forecast */}
-        <div className="mt-4">
-          <h2 className="text-xl text-center font-bold">5-Day Forecast</h2>
-          <div className="flex justify-center w-full gap-4 mt-4">
+        <div className="mt-6">
+          <h2 className="text-2xl text-center font-bold">5-Day Forecast</h2>
+          <div className="lg:flex justify-center w-full gap-4 mt-4  grid grid-cols-3 md:grid-cols-4  px-2 ">
             {dailyForecasts.map((f, index) => (
               <div
                 key={index}
@@ -257,7 +257,10 @@ export default function App() {
                 }}
               >
                 {/* Show "Today" for the first item */}
-                <div className=" flex justify-center flex-col items-center mx-auto w-28">
+                <div
+                  className=" 
+                flex justify-center flex-col items-center text-center mx-auto  sm:[w-50px] md:w-[120px] lg:w-20 xl:w-24 2xl:w-28"
+                >
                   <p className="font-semibold ">
                     {index === 0 ? "Today" : f.date}
                   </p>
