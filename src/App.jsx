@@ -179,7 +179,7 @@ export default function App() {
   };
 
   return (
-    <div className="border-2 border-red-600 w-full h-full  flex flex-col lg:flex-row ">
+    <div className=" w-full h-full  flex flex-col lg:flex-row ">
       {/* Left side */}
       <div className="col-span-3 w-full flex flex-col items-center justify-center lg:p-8 pb-2">
         <div className=" lg:py-6 pt-6 pb-4 text-center">
@@ -242,7 +242,7 @@ export default function App() {
       </div>
 
       {/* Right side */}
-      <div className="col-span-4 w-full border-2 border-red-600 flex flex-col justify-center lg:p-4 ">
+      <div className="col-span-4 w-full  flex flex-col justify-center lg:p-4 ">
         {/* 5-Day Forecast */}
         <div className="mt-6">
           <h2 className="text-2xl text-center font-bold">5-Day Forecast</h2>
