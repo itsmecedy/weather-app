@@ -244,7 +244,7 @@ export default function App() {
             {dailyForecasts.map((f, index) => (
               <div
                 key={index}
-                className="flex items-center border p-2 sm:w-20 lg:text-xsm md:w-28 lg:w-24 xl:w-28 w-32"
+                className="flex items-center justify-center border p-2 "
                 style={{
                   backgroundColor:
                     index === 0 ? "#2699E3" : "rgba(255, 255, 255, 0.3)",
@@ -257,7 +257,7 @@ export default function App() {
                 }}
               >
                 {/* Show "Today" for the first item */}
-                <div className=" flex justify-center flex-col items-center mx-auto">
+                <div className=" flex justify-center flex-col items-center mx-auto w-28">
                   <p className="font-semibold ">
                     {index === 0 ? "Today" : f.date}
                   </p>
