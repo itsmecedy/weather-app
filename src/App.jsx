@@ -210,7 +210,9 @@ export default function App() {
         </div>
         {/* Display local time */}
         {localTime && (
-          <p className="lg:mt-4 text-md lg:text-lg font-semibold">{localTime}</p>
+          <p className="lg:mt-4 text-md lg:text-lg font-semibold">
+            {localTime}
+          </p>
         )}
 
         {/* Weather Condition */}
@@ -229,8 +231,12 @@ export default function App() {
               )}
             </div>
 
-            <b className="mb:text-4xl text-3xl lg:mb-4">{weather.weather[0].main}</b>
-            <p className="mb:text-3xl text-2xl ">{weather.weather[0].description}</p>
+            <b className="mb:text-4xl text-3xl lg:mb-4">
+              {weather.weather[0].main}
+            </b>
+            <p className="mb:text-3xl text-2xl ">
+              {weather.weather[0].description}
+            </p>
           </>
         )}
       </div>
