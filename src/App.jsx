@@ -189,7 +189,7 @@ export default function App() {
           )}
         </div>
         {/* Search box */}
-        <div className="w-2/3 flex items-center justify-center space-x-2 md:mb-4">
+        <div className="w-2/3 flex items-center flex-col md:flex-row justify-center space-y-2 md:space-x-2 mb-2 md:mb-4">
           <input
             type="text"
             placeholder="Enter City/Town..."
